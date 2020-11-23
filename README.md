@@ -1,6 +1,6 @@
 # openHAB Docker Containers
 
-![openHAB logo](https://github.com/openhab/openhab-docker/raw/master/images/openhab.png)
+![openHAB logo](https://github.com/openhab/openhab-docker/raw/master/openhab.png)
 
 [![Build Status](https://ci.openhab.org/job/openHAB-Docker/badge/icon)](https://ci.openhab.org/job/openHAB-Docker/)
 [![EPL-2.0](https://img.shields.io/badge/license-EPL%202-green.svg)](https://opensource.org/licenses/EPL-2.0)
@@ -448,7 +448,7 @@ All messages shown during the update are also logged to `userdata/logs/update.lo
 
 ## Building the images
 
-Checkout the GitHub repository, change to a directory containing a Dockerfile (e.g. `3.0.0/debian`) and then run these commands to build and run a Docker image for your current platform:
+Checkout the GitHub repository, change to a directory containing a Dockerfile (e.g. `debian`) and then run these commands to build and run a Docker image for your current platform:
 
 ```shell
 $ docker build --tag openhab/openhab .
@@ -467,7 +467,7 @@ $ sudo systemctl restart docker
 $ docker buildx create --name builder --use
 ```
 
-Change to a directory containing a Dockerfile (e.g. `3.0.0/debian`) and then use the following command to build a armhf image:
+Change to a directory containing a Dockerfile (e.g. `debian`) and then use the following command to build a armhf image:
 
 ```
 $ docker buildx build --platform linux/arm/v7 --tag openhab/openhab --load .
