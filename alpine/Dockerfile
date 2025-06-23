@@ -66,6 +66,14 @@ RUN apk update --no-cache && \
     chmod u+s /usr/sbin/arping && \
     rm -rf /var/cache/apk/*
 
+# Create user and groups
+COPY create-groups /tmp/create-groups
+RUN chmod +x /tmp/create-groups && \
+    groupadd -g $GROUP_ID openhab && \
+    adduser -u $USER_ID -D -g '' -h "${OPENHAB_HOME}" -G openhab openhab && \
+    /tmp/create-groups && \
+    rm /tmp/create-groups
+
 # Limit JDK crypto policy by default to comply with local laws which may prohibit use of unlimited strength cryptography
 RUN JAVA_HOME=$(find /usr/lib/jvm -mindepth 1 -maxdepth 1 -type d) && \
     sed -i 's/^crypto.policy=unlimited/crypto.policy=limited/' "${JAVA_HOME}/conf/security/java.security"
