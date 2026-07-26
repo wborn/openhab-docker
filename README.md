@@ -498,8 +498,16 @@ For more information on this see the [Docker documentation](https://docs.docker.
 Check out the GitHub repository and run the following commands from its root directory to build and run a Debian-based Docker image for your current platform:
 
 ```shell
-$ docker build --file debian/Dockerfile --build-arg JAVA_VERSION=21 --build-arg OPENHAB_VERSION=5.2.0 --tag openhab/openhab .
-$ docker run openhab/openhab
+docker build \
+  --file debian/Dockerfile \
+  --build-arg JAVA_VERSION=21 \
+  --build-arg OPENHAB_VERSION=5.2.0 \
+  --tag openhab/openhab \
+  .
+```
+
+```shell
+docker run openhab/openhab
 ```
 
 To build the Alpine-based image instead, use `--file alpine/Dockerfile`.
@@ -510,14 +518,24 @@ To be able to build the same image for other platforms (e.g. arm/v7, arm64 on am
 First configure QEMU binary formats and a builder using:
 
 ```shell
-$ docker run --privileged --rm tonistiigi/binfmt:qemu-v9.2.2 --install all
-$ docker buildx create --name builder --use
+docker run --privileged --rm tonistiigi/binfmt:qemu-v9.2.2 --install all
+```
+
+```shell
+docker buildx create --name builder --use
 ```
 
 Then run the following command from the root directory to build an ARM64 Debian image:
 
 ```shell
-$ docker buildx build --file debian/Dockerfile --build-arg JAVA_VERSION=21 --build-arg OPENHAB_VERSION=5.2.0 --platform linux/arm64 --tag openhab/openhab --load .
+docker buildx build \
+  --file debian/Dockerfile \
+  --build-arg JAVA_VERSION=21 \
+  --build-arg OPENHAB_VERSION=5.2.0 \
+  --platform linux/arm64 \
+  --tag openhab/openhab \
+  --load \
+  .
 ```
 
 The `build` script in the root of the repository helps to simplify building the openHAB images with BuildKit.

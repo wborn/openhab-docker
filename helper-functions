@@ -239,8 +239,7 @@ build() {
 	local tag_options=${tags//$(docker_repo)/--tag $(docker_repo)}
 	local output_options="--output type=image,oci-mediatypes=false,push=$([ "$push" == "--push" ] && echo true || echo false)"
 	local build_options="$build_arg_options --platform $(platforms $openhab_version $dist) $tag_options $output_options --progress plain --provenance=false"
-	local dockerfile_path="--file $dist/Dockerfile"
-	local build_command="docker buildx build $dockerfile_path $build_options ."
+	local build_command="docker buildx build --file $dist/Dockerfile $build_options ."
 
 	echo
 	echo "Building openHAB $openhab_version $dist Docker image"
