@@ -72,7 +72,7 @@ RUN apk update --no-cache && \
     rm -rf /var/cache/apk/*
 
 # Create user and groups
-COPY create-groups /tmp/create-groups
+COPY common/create-groups /tmp/create-groups
 RUN chmod +x /tmp/create-groups && \
     groupadd -g $GROUP_ID openhab && \
     adduser -u $USER_ID -D -g '' -h "${OPENHAB_HOME}" -G openhab openhab && \
@@ -99,7 +99,7 @@ RUN version="$(echo $OPENHAB_VERSION | sed 's/snapshot/SNAPSHOT/g')" && \
     mkdir -p "${OPENHAB_HOME}/dist" && \
     cp -a "${OPENHAB_CONF}" "${OPENHAB_USERDATA}" "${OPENHAB_HOME}/dist" && \
     echo 'export TERM=${TERM:=dumb}' | tee -a ~/.bashrc
-COPY update ${OPENHAB_HOME}/runtime/bin/update
+COPY common/update ${OPENHAB_HOME}/runtime/bin/update
 RUN chmod +x ${OPENHAB_HOME}/runtime/bin/update
 
 # Expose volume with configuration and userdata dir
@@ -113,7 +113,7 @@ HEALTHCHECK --interval=1m --timeout=10s --retries=3 --start-period=20m CMD curl 
 
 # Set working directory and entrypoint
 WORKDIR ${OPENHAB_HOME}
-COPY entrypoint /entrypoint
+COPY alpine/entrypoint /entrypoint
 RUN chmod +x /entrypoint
 ENTRYPOINT ["/entrypoint"]
 

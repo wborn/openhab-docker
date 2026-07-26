@@ -1,0 +1,34 @@
+# Version control
+.git
+.gitignore
+
+# GitHub metadata
+.github
+
+# Documentation and repository tooling
+README.md
+LICENSE
+build
+helper-functions
+
+# IDEs and editors
+.idea
+.vscode
+*.iml
+.classpath
+.factorypath
+.metadata
+.project
+.settings
+.history
+.vim
+tags
+*.sw?
+*~
+
+# Temporary files
+.DS_Store
+*.bak
+*.log
+*.orig
+*.tmp
